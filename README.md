@@ -29,16 +29,16 @@ jakože basic eshop :)
 
 ## Rozdělení infrastrukturních odpovědností
 ### Jaroslav Němec
-- IR01 - Správa stavu aplikace 
-- IR02 - Dispatcher
-- IR03 - Asynchronní operace
-- IR05 - Selektory
+- IR01 - Správa stavu aplikace (návrh struktury globálního stavu, inicializace a aktualizace stavu)
+- IR02 - Dispatcher (implementace centrální interpretace akcí, koordinace změn stavu)
+- IR03 - Asynchronní operace (simulace načítání produktů (mock API), zpracování chybových stavů)
+- IR05 - Selektory (implementace funkcí pro výběr dat ze stavu (např. obsah košíku, celková cena))
 
 ### Radim Janeček
-- IR04 - Router/Navigační logika
-- IR06 - Renderovací logika
-- IR07 - Handlery a vazba UI
-- IR08 - Autentizace a technická autorizace
+- IR04 - Router/Navigační logika (mapování URL na aplikační kontext, synchronizace stavu aplikace s adresou prohlížeče)
+- IR06 - Renderovací logika (implementace view funkcí a skládání UI)
+- IR07 - Handlery a vazba UI (mapování uživatelských akcí na dispatch(action))
+- IR08 - Autentizace a technická autorizace (řízení ui módů podle rolí přihlášených uživatelů, uchovávání informací o přihlášení)
 
 ## Rozhraní mezi částmi
 
