@@ -41,7 +41,28 @@ jakože basic eshop :)
 - IR08 - Autentizace a technická autorizace (řízení ui módů podle rolí přihlášených uživatelů, uchovávání informací o přihlášení)
 
 ## Rozhraní mezi částmi
+Jednotlivé části aplikace spolu komunikují výhradně prostřednictvím:
+- akcí (actions),
+- centrálního stavu,
+- selektorů.
+### Rozhraní: Košík ↔ Objednávka
+- Akce: ORDER_CREATE využívá data z košíku
+- Sdílená data: cart.items, cart.totalPrice,
+- Pravidlo: objednávku lze vytvořit pouze z neprázdného košíku
+### Rozhraní: Uživatel ↔ Objednávka
+- Akce: USER_LOGIN, USER_LOGOUT, ORDER_CREATE
+- Sdílená data: auth.currentUser
+- Pravidlo: objednávku může vytvořit pouze přihlášený uživatel
+### Rozhraní: Dispatcher ↔ Business části
+- Dispatcher přijímá všechny akce a deleguje je na příslušné business moduly
+- Business logika nemění stav přímo, ale vrací nový stav
+### Rozhraní: Selektory ↔ View
+- Selektory poskytují data pro UI: selectCartItems, selectCartTotalPrice, selectCurrentUser
+- View nepřistupuje ke stavu přímo
 
+### Rozhraní: Router ↔ Aplikace
+- Router převádí URL na akce (např. otevření detailu produktu nebo košíku)
+- Navigace je řízena změnami stavu
 ## Způsob spolupráce a kontroly práce:
 - Tým používá Github Issues pro trackování progressu a definování práce, co je třeba udělat.
 - Jestliže člen nesplní část, která mu byla přidělena, nemá to vliv na práci ostatních. Ostatní si stejně musí napsat mock systému a testy, aby předveli funkčnost
