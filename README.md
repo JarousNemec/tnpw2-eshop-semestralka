@@ -13,6 +13,12 @@ jakože basic eshop :)
 ### Jaroslav Němec
 - Business entita: Objednávka
 - Stavový automat: created -> confirmed -> shipped ->cancelled
+- Popis odpovědnosti za chování:
+- Povolené akce: USER_LOGIN, USER_LOGOUT
+- Business pravidla: Nepřihlášený uživatel nemůže vytvořit objednávku. Přihlášený uživatel může pracovat s košíkem a objednávkami.
+
+- Business entita: Uživatel
+- Stavový automat: anonymous -> authenticated, authenticated -> anonymous
 - Popis odpovědnosti za chování: 
 
 ### Radim Janeček
@@ -20,7 +26,11 @@ jakože basic eshop :)
 - Stavový automat: empty -> active -> checking_out -> completed
 - Popis odpovědnosti za chování:
 
-Další zatím nerozdělené business entity: Uživatel, produkt, položka v košíku
+- Business entita: Položka v košíku
+- Stavový automat: 
+- Popis odpovědnosti za chování:
+
+Produkt odstraněn, protože to je RO entita nikoli stavová.
 
 ## Rozdělení infrastrukturních odpovědností
 ### Jaroslav Němec
