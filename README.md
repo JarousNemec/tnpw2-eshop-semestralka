@@ -5,8 +5,8 @@ jakože basic eshop :)
 ## Téma: Jednoduchý e-shop (bez plateb)
 
 ## Seznam členů týmu: 
-- Radim Janeček I2400572
-- Jaroslav Němec I2500139
+- Radim Janeček janecra1
+- Jaroslav Němec jaroslav.nemec
 
 ## Rozdělení business odpovědností
 
