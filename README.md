@@ -6,7 +6,7 @@ jakože basic eshop :)
 
 ## Seznam členů týmu: 
 - Radim Janeček janecra1
-- Jaroslav Němec jaroslav.nemec
+- Jaroslav Němec nemecja2
 
 ## Rozdělení business odpovědností
 
