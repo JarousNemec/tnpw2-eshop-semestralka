@@ -10,6 +10,7 @@ import { HomeView } from './views/HomeView.js';
 
 export function render(root, state, dispatch) {
   root.replaceChildren();
+  console.log(state) //todo: remove for prod
 
   const viewState = selectViewState(state);
 

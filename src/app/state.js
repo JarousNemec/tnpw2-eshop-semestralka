@@ -1,33 +1,25 @@
-// src/app/state.js
-/*
-UI state contract
-=================
-state.ui = {
-  status: 'READY' | 'LOADING' | 'ERROR',
-  errorMessage: null | string,
-};
-READY -> LOADING -> READY
-READY -> ERROR
-*/
+import {AppViews} from "../enums/app/AppViews.js";
+import {UserModel} from "../models/UserModel.js";
+import {UserStates} from "../enums/user/UserStates.js";
+import {UiStates} from "../enums/app/UiStates.js";
 
 export function createInitialState() {
-  return {
-    // TODO: Přidejte doménová data (např. products: [], orders: [])
+    return {
+        // ====== identity  ======
+        auth: {
+            user: new UserModel(UserStates.ANONYMOUS, "", "", "", "", "", [])
+        },
 
-    // ====== identity  ======
-    auth: {
-      role: 'ANONYMOUS', // ANONYMOUS | USER | ADMIN
-      userId: null,
-      token: null,
-    },
+        // ====== UI state =========
+        ui: {
+            view: AppViews.HOME,
+            status: UiStates.LOADING,
+            errorMessage: null,
+        },
 
-    // ====== UI state =========
-    ui: {
-      view: 'HOME',       // TODO: Definujte pohledy (HOME | LIST | DETAIL | ...)
-      selectedId: null,
-      status: 'LOADING',  // LOADING | READY | ERROR
-      errorMessage: null,
-      notification: null,
-    },
-  };
+        shop: {
+            products: [],
+            cart: null
+        }
+    };
 }

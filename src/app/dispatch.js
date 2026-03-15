@@ -1,28 +1,64 @@
-// src/app/dispatch.js
+import {appInit} from './appInit.js';
+import {recoverFromError} from './actions/recoverFromError.js';
+import {AppActions} from "../enums/app/AppActions.js";
+import {CartActions} from "../enums/cart/CartActions.js";
+import {OrderActions} from "../enums/order/OrderActions.js";
+import {UserActions} from "../enums/user/UserActions.js";
 
-import { appInit } from './appInit.js';
-import { recoverFromError } from './actions/recoverFromError.js';
-
-// TODO: Import your action handlers here
-// import { navigateTo } from './actions/navigateTo.js';
 
 export function createDispatcher(store, api) {
-  return async function dispatch(action) {
-    const { type, payload = {} } = action ?? {};
+    return async function dispatch(action) {
+        const {type, payload = {}} = action ?? {};
 
-    switch (type) {
-      case 'APP_INIT':
-        return appInit({ store, api, dispatch });
+        switch (type) {
 
-      case 'RECOVER_FROM_ERROR':
-        return recoverFromError(store);
+            // application inside actions
+            case AppActions.APP_INIT:
+                return appInit({store, api, dispatch});
 
-      // TODO: Add your action cases here
-      // case 'NAVIGATE_TO':
-      //   return navigateTo({ store, payload });
+            case 'RECOVER_FROM_ERROR':
+                return recoverFromError(store);
 
-      default:
-        console.warn(`Unknown action type: ${type}`);
-    }
-  };
+            case AppActions.DISPLAY_ERROR:
+                break;
+            case AppActions.ENTER_CART_VIEW:
+                break;
+            case AppActions.ENTER_ORDER_VIEW:
+                break;
+            case AppActions.ENTER_SHOP_VIEW:
+                break;
+
+            // cart state actions
+            case CartActions.ADD_ITEM:
+                break;
+            case CartActions.CLEAR:
+                break;
+            case CartActions.REMOVE_ITEM:
+                break;
+            case CartActions.UPDATE_ITEM:
+                break;
+
+            // order state actions
+            case OrderActions.CREATE:
+                break;
+            case OrderActions.SHIP:
+                break;
+            case OrderActions.CANCEL:
+                break;
+            case OrderActions.CONFIRM:
+                break;
+            case OrderActions.FINISH:
+                break;
+
+            // user state actions
+            case UserActions.LOG_IN:
+                break;
+            case UserActions.LOG_OUT:
+                break;
+
+            // default reaction to unknown action
+            default:
+                console.warn(`Unknown action type: ${type}`);
+        }
+    };
 }

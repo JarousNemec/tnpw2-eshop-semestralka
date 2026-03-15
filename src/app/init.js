@@ -6,6 +6,7 @@ import { createDispatcher } from './dispatch.js';
 import { render } from '../ui/render.js';
 import { createApi } from '../api/mockApi.js';
 import { urlToAction } from '../infra/router/router.js';
+import {AppActions} from "../enums/app/AppActions.js";
 
 // 1. inicializace infrastruktury aplikace
 const api = createApi();
@@ -18,7 +19,7 @@ const root = document.getElementById('app');
 store.subscribe((state) => render(root, state, dispatch));
 
 // 3. aplikační inicializace stavu
-dispatch({ type: 'APP_INIT' });
+dispatch({ type: AppActions.APP_INIT });
 
 // 4. naslouchání změnám v řádku s adresou
 window.addEventListener('popstate', () => {
