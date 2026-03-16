@@ -1,11 +1,7 @@
-import {UserRoles} from "../enums/user/UserRoles.js";
-import {AppViews} from "../enums/app/AppViews.js";
-import {UiStates} from "../enums/app/UiStates.js";
+import {UserRoles, UserStates, CartStates, UiStates} from "../enums/states.js";
+import {AppViews} from "../enums/views.js";
 import {UserModel} from "../models/UserModel.js";
-import {UserStates} from "../enums/user/UserStates.js";
 import {CartModel} from "../models/CartModel.js";
-import {CartStates} from "../enums/cart/CartStates.js";
-import {AppStates} from "../enums/app/AppStates.js";
 /**
  * @param {Object} context
  * @param {Object} context.store - State management aplikace
@@ -15,7 +11,7 @@ import {AppStates} from "../enums/app/AppStates.js";
 export async function appInit({store, api, dispatch}) {
     store.setState((state) => ({
         ...state,
-        ui: {...state.ui, status: AppStates.LOADING, errorMessage: null},
+        ui: {...state.ui, status: UiStates.LOADING, errorMessage: null},
     }));
 
     try {

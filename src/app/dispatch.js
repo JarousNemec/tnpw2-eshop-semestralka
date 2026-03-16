@@ -1,9 +1,6 @@
 import {appInit} from './appInit.js';
 import {recoverFromError} from './actions/recoverFromError.js';
-import {AppActions} from "../enums/app/AppActions.js";
-import {CartActions} from "../enums/cart/CartActions.js";
-import {OrderActions} from "../enums/order/OrderActions.js";
-import {UserActions} from "../enums/user/UserActions.js";
+import {AppActions, CartActions, OrderActions, UserActions} from "../enums/actions.js";
 
 
 export function createDispatcher(store, api) {

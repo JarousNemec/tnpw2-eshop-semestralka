@@ -1,7 +1,6 @@
-import {AppViews} from "../enums/app/AppViews.js";
+import {AppViews} from "../enums/views.js";
 import {UserModel} from "../models/UserModel.js";
-import {UserStates} from "../enums/user/UserStates.js";
-import {UiStates} from "../enums/app/UiStates.js";
+import {UserStates, UiStates} from "../enums/states.js";
 
 export function createInitialState() {
     return {

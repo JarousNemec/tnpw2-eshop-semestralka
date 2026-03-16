@@ -6,7 +6,7 @@ import { createDispatcher } from './dispatch.js';
 import { render } from '../ui/render.js';
 import { createApi } from '../api/mockApi.js';
 import { urlToAction } from '../infra/router/router.js';
-import {AppActions} from "../enums/app/AppActions.js";
+import {AppActions} from "../enums/actions.js";
 
 // 1. inicializace infrastruktury aplikace
 const api = createApi();
