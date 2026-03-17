@@ -2,15 +2,29 @@
 <html lang="cs">
   <head>
     <meta charset="UTF-8" />
-    <title>Studijní agenda – demo</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
-    />
+    <title>E-shop SPA</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+    
+    <style>
+      .katalog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+      .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .card button {
+        margin-top: auto;
+      }
+    </style>
+
   </head>
   <body>
     <div id="app"></div>
-
     <script type="module" src="./src/index.js"></script>
   </body>
 </html>
