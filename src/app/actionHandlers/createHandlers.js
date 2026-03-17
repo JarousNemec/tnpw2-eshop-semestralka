@@ -15,7 +15,6 @@ export function createHandlers(dispatch, viewState) {
 
     case 'HOME':
       return {
-        // Tuto funkci jsme si nachystali v HomeView.js
         onAddToCart: (productId) => {
           
            dispatch({ 

@@ -37,7 +37,6 @@ export function selectViewState(state) {
   // TODO: Přidejte case větve pro vaše views
   switch (view) {
     case 'HOME':
-      // TADY přidáváme products do dat, aby je HomeView vidělo
       return { 
           type: 'HOME', 
           data: { products: state.shop.products }, 
