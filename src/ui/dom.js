@@ -47,4 +47,4 @@ export function createElement(tag, props = {}, ...children) {
     return element;
 }
 
-export const h = createElement;
+export const h = createElement; // h jako hyperscript
