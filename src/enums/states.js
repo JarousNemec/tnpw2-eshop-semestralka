@@ -25,10 +25,11 @@ export const CartStates = Object.freeze({
     CHECKING_OUT: "CHECKING_OUT",
 });
 
-/** @type {Readonly<{CREATED: string, CONFIRMED: string, SHIPPED: string, DONE: string}>} */
+/** @type {Readonly<{CREATED: string, CONFIRMED: string, SHIPPED: string, DONE: string, CANCELLED: string}>} */
 export const OrderStates = Object.freeze({
     CREATED: "ORDER_CREATED",
     CONFIRMED: "ORDER_CONFIRMED",
     SHIPPED: "ORDER_SHIPPED",
     DONE: "ORDER_DONE",
+    CANCELLED: "ORDER_CANCELLED",
 });

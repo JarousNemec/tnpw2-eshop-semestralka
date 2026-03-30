@@ -1,10 +1,14 @@
-/** @type {Readonly<{APP_INIT: string, DISPLAY_ERROR: string, ENTER_SHOP_VIEW: string, ENTER_CART_VIEW: string, ENTER_ORDER_VIEW: string}>} */
+/** @type {Readonly<{APP_INIT: string, DISPLAY_ERROR: string, RECOVER_FROM_ERROR: string, ENTER_HOME_VIEW: string, ENTER_CART_VIEW: string, ENTER_ORDER_VIEW: string, RELOAD_PRODUCTS: string, RELOAD_ORDERS: string, RELOAD_USER: string}>} */
 export const AppActions = Object.freeze({
     APP_INIT: "APP_INIT",
     DISPLAY_ERROR: "DISPLAY_ERROR",
-    ENTER_SHOP_VIEW: "ENTER_SHOP_VIEW",
+    RECOVER_FROM_ERROR: "RECOVER_FROM_ERROR",
+    ENTER_HOME_VIEW: "ENTER_HOME_VIEW",
     ENTER_CART_VIEW: "ENTER_CART_VIEW",
     ENTER_ORDER_VIEW: "ENTER_ORDER_VIEW",
+    RELOAD_PRODUCTS: "RELOAD_PRODUCTS",
+    RELOAD_ORDERS: "RELOAD_ORDERS",
+    RELOAD_USER: "RELOAD_USER",
 });
 
 /** @type {Readonly<{ADD_ITEM: string, REMOVE_ITEM: string, UPDATE_ITEM: string, CLEAR: string}>} */

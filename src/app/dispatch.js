@@ -1,57 +1,96 @@
-import {appInit} from './appInit.js';
-import {recoverFromError} from './actions/recoverFromError.js';
-import {AppActions, CartActions, OrderActions, UserActions} from "../enums/actions.js";
+import { appInit } from './actions/appInit.js';
+import { recoverFromError } from './actions/recoverFromError.js';
+import { displayError } from './actions/displayError.js';
+import { enterHomeView } from './actions/enterHomeView.js';
+import { enterCartView } from './actions/enterCartView.js';
+import { enterOrderView } from './actions/enterOrderView.js';
+import { addToCart } from './actions/addToCart.js';
+import { removeFromCart } from './actions/removeFromCart.js';
+import { updateCartItem } from './actions/updateCartItem.js';
+import { clearCart } from './actions/clearCart.js';
+import { createOrder } from './actions/createOrder.js';
+import { cancelOrder } from './actions/cancelOrder.js';
+import { confirmOrder } from './actions/confirmOrder.js';
+import { shipOrder } from './actions/shipOrder.js';
+import { finishOrder } from './actions/finishOrder.js';
+import { logIn } from './actions/logIn.js';
+import { logOut } from './actions/logOut.js';
+import { reloadProducts } from './actions/reloadProducts.js';
+import { reloadOrders } from './actions/reloadOrders.js';
+import { reloadUser } from './actions/reloadUser.js';
+import { AppActions, CartActions, OrderActions, UserActions } from '../enums/actions.js';
 
 
 export function createDispatcher(store, api) {
     return async function dispatch(action) {
-        const {type, payload = {}} = action ?? {};
+        const { type, payload = {} } = action ?? {};
 
         switch (type) {
 
-            // application inside actions
+            // application actions
             case AppActions.APP_INIT:
-                return appInit({store, api, dispatch});
+                return appInit({ store, api, dispatch });
 
-            case 'RECOVER_FROM_ERROR':
+            case AppActions.RECOVER_FROM_ERROR:
                 return recoverFromError(store);
 
             case AppActions.DISPLAY_ERROR:
-                break;
+                return displayError({ store, payload });
+
+            case AppActions.ENTER_HOME_VIEW:
+                return enterHomeView({ store });
+
             case AppActions.ENTER_CART_VIEW:
-                break;
+                return enterCartView({ store });
+
             case AppActions.ENTER_ORDER_VIEW:
-                break;
-            case AppActions.ENTER_SHOP_VIEW:
-                break;
+                return enterOrderView({ store });
 
-            // cart state actions
+            // cart actions
             case CartActions.ADD_ITEM:
-                break;
-            case CartActions.CLEAR:
-                break;
+                return addToCart({ store, payload });
+
             case CartActions.REMOVE_ITEM:
-                break;
+                return removeFromCart({ store, payload });
+
             case CartActions.UPDATE_ITEM:
-                break;
+                return updateCartItem({ store, payload });
 
-            // order state actions
+            case CartActions.CLEAR:
+                return clearCart({ store });
+
+            // order actions
             case OrderActions.CREATE:
-                break;
-            case OrderActions.SHIP:
-                break;
-            case OrderActions.CANCEL:
-                break;
-            case OrderActions.CONFIRM:
-                break;
-            case OrderActions.FINISH:
-                break;
+                return createOrder({ store, api, dispatch, payload });
 
-            // user state actions
+            case OrderActions.CANCEL:
+                return cancelOrder({ store, api, dispatch, payload });
+
+            case OrderActions.CONFIRM:
+                return confirmOrder({ store, payload });
+
+            case OrderActions.SHIP:
+                return shipOrder({ store, payload });
+
+            case OrderActions.FINISH:
+                return finishOrder({ store, payload });
+
+            // user actions
             case UserActions.LOG_IN:
-                break;
+                return logIn({ store, api, dispatch, payload });
+
             case UserActions.LOG_OUT:
-                break;
+                return logOut({ store, api });
+
+            // reload actions
+            case AppActions.RELOAD_PRODUCTS:
+                return reloadProducts({ store, api });
+
+            case AppActions.RELOAD_ORDERS:
+                return reloadOrders({ store, api });
+
+            case AppActions.RELOAD_USER:
+                return reloadUser({ store, api });
 
             // default reaction to unknown action
             default:
