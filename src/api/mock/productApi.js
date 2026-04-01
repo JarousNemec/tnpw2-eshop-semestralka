@@ -1,22 +1,30 @@
-import { delay } from '../utils.js';
+import {delay} from '../utils.js';
 
 export function createProductApi(db) {
-  return {
-    async getProducts() {
-      await delay();
-      return { status: 'SUCCESS', products: structuredClone(db.products) };
-    },
+    return {
 
-    async getProductById(productId) {
-      await delay();
+        /**
+         * get all products in db
+         * */
+        async getProducts() {
+            await delay();
+            return {status: 'SUCCESS', products: structuredClone(db.products)};
+        },
 
-      const product = db.products.find((p) => p.productId === productId);
+        /**
+         * get specific product by id
+         * @param {{ productId : string}} context
+         */
+        async getProductById({productId}) {
+            await delay();
 
-      if (!product) {
-        return { status: 'REJECTED', reason: 'Produkt nenalezen' };
-      }
+            const product = db.products.find((p) => p.productId === productId);
 
-      return { status: 'SUCCESS', product: structuredClone(product) };
-    },
-  };
+            if (!product) {
+                return {status: 'REJECTED', reason: 'Produkt nenalezen'};
+            }
+
+            return {status: 'SUCCESS', product: structuredClone(product)};
+        },
+    };
 }

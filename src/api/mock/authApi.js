@@ -1,38 +1,51 @@
-import { delay } from '../utils.js';
+import {delay} from '../utils.js';
 
 export function createAuthApi(db) {
-  return {
-    async whoAmI(token) {
-      await delay();
+    return {
 
-      if (!token) {
-        return { status: 'REJECTED', reason: 'Uživatel není přihlášen' };
-      }
+        /**
+         * get current logged user data
+         * @param {{ token : string}} context
+         */
+        async whoAmI({token}) {
+            await delay();
 
-      const user = db.users.find((u) => u.token === token);
+            if (!token) {
+                return {status: 'REJECTED', reason: 'Uživatel není přihlášen'};
+            }
 
-      if (!user) {
-        return { status: 'REJECTED', reason: 'Neplatný token' };
-      }
+            const user = db.users.find((u) => u.token === token);
 
-      return { status: 'SUCCESS', userId: user.userId, role: user.role, email: user.email };
-    },
+            if (!user) {
+                return {status: 'REJECTED', reason: 'Neplatný token'};
+            }
 
-    async login(email, password) {
-      await delay();
+            return {status: 'SUCCESS', userId: user.userId, role: user.role, email: user.email};
+        },
 
-      const user = db.users.find((u) => u.email === email && u.password === password);
+        /**
+         * mock BE process of login and user verification
+         * @param {{ email : string, password : string}} context
+         */
+        async login({email, password}) {
+            await delay();
 
-      if (!user) {
-        return { status: 'REJECTED', reason: 'Nesprávný e-mail nebo heslo' };
-      }
+            const user = db.users.find((u) => u.email === email && u.password === password);
 
-      return { status: 'SUCCESS', token: user.token, userId: user.userId, role: user.role, email: user.email };
-    },
+            if (!user) {
+                return {status: 'REJECTED', reason: 'Nesprávný e-mail nebo heslo'};
+            }
 
-    async logout(token) {
-      await delay();
-      return { status: 'SUCCESS' };
-    },
-  };
+            return {status: 'SUCCESS', token: user.token, userId: user.userId, role: user.role, email: user.email};
+        },
+
+        /**
+         * mock BE process of logout
+         * @param {{ token : string}} context
+         */
+        async logout(token) {
+            await delay();
+            return {status: 'SUCCESS'};
+        },
+    };
 }

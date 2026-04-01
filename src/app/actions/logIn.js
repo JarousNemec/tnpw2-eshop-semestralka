@@ -1,23 +1,28 @@
-import { ProductModel } from '../../models/ProductModel.js';
-import { OrderModel } from '../../models/OrderModel.js';
-import { AddressModel } from '../../models/AddressModel.js';
-import { UserModel } from '../../models/UserModel.js';
-import { UserStates, UserRoles, OrderStates } from '../../enums/states.js';
-import { AppActions } from '../../enums/actions.js';
-// TODO: refactor code
+import {ProductModel} from '../../models/ProductModel.js';
+import {OrderModel} from '../../models/OrderModel.js';
+import {AddressModel} from '../../models/AddressModel.js';
+import {UserModel} from '../../models/UserModel.js';
+import {UserStates, UserRoles, OrderStates} from '../../enums/states.js';
+import {AppActions} from '../../enums/actions.js';
+
 /**
  * @param {{ store, api, dispatch, payload: { email: string, password: string } }} context
  */
-export async function logIn({ store, api, dispatch, payload }) {
-    const { email, password } = payload;
+export async function logIn({store, api, dispatch, payload}) {
 
+    //load operation parameter
+    const {email, password} = payload;
+
+    //log user to app
     const response = await api.auth.login(email, password);
 
+    //handle error
     if (response.status !== 'SUCCESS') {
-        dispatch({ type: AppActions.DISPLAY_ERROR, payload: { message: response.reason } });
+        dispatch({type: AppActions.DISPLAY_ERROR, payload: {message: response.reason}});
         return;
     }
 
+    //get user orders
     const ordersResponse = await api.orders.getUserOrders(response.token);
     const orders = ordersResponse.status === 'SUCCESS'
         ? ordersResponse.orders.map((o) => {
@@ -27,11 +32,13 @@ export async function logIn({ store, api, dispatch, payload }) {
         })
         : [];
 
+    //create new user instance as currently logged in user
     const role = response.role === UserRoles.ADMIN ? UserRoles.ADMIN : UserRoles.CUSTOMER;
     const user = new UserModel(UserStates.AUTHENTICATED, role, response.userId, response.token, response.email, '', orders);
 
+    //set new user to app state
     store.setState((state) => ({
         ...state,
-        auth: { user },
+        auth: {user},
     }));
 }

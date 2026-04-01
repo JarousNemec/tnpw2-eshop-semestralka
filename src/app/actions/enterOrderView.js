@@ -1,8 +1,12 @@
-import { AppViews } from '../../enums/views.js';
-// TODO: refactor code
-export async function enterOrderView({ store }) {
+import {AppViews} from '../../enums/views.js';
+
+/**
+ * @param {{ store }} context
+ * */
+export async function enterOrderView({store}) {
+    //switch ui state to order view
     store.setState((state) => ({
         ...state,
-        ui: { ...state.ui, view: AppViews.ORDER },
+        ui: {...state.ui, view: AppViews.ORDER},
     }));
 }

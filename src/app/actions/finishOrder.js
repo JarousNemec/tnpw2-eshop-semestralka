@@ -1,20 +1,25 @@
-import { OrderModel } from '../../models/OrderModel.js';
-import { UserModel } from '../../models/UserModel.js';
-import { OrderStates, UserRoles } from '../../enums/states.js';
-import { AppActions } from '../../enums/actions.js';
-// TODO: refactor code
+import {OrderModel} from '../../models/OrderModel.js';
+import {UserModel} from '../../models/UserModel.js';
+import {OrderStates, UserRoles} from '../../enums/states.js';
+import {AppActions} from '../../enums/actions.js';
+
 /**
  * @param {{ store, dispatch, payload: { orderId: string } }} context
  */
-export async function finishOrder({ store, dispatch, payload }) {
-    const { orderId } = payload;
+export async function finishOrder({store, dispatch, payload}) {
+    //load operation parameters
+    const {orderId} = payload;
     const user = store.getState().auth.user;
 
+    //check if user has permissions
     if (user.role !== UserRoles.ADMIN) {
-        dispatch({ type: AppActions.DISPLAY_ERROR, payload: { message: 'Nedostatečná oprávnění' } });
+        dispatch({type: AppActions.DISPLAY_ERROR, payload: {message: 'Nedostatečná oprávnění'}});
         return;
     }
 
+
+    //update order state in app state
+    //todo: update state in db through api
     store.setState((state) => {
         const u = state.auth.user;
         const updatedOrders = u.orders.map((o) =>
@@ -23,6 +28,6 @@ export async function finishOrder({ store, dispatch, payload }) {
                 : o
         );
         const updatedUser = new UserModel(u.state, u.role, u.userId, u.token, u.username, u.password, updatedOrders);
-        return { ...state, auth: { user: updatedUser } };
+        return {...state, auth: {user: updatedUser}};
     });
 }

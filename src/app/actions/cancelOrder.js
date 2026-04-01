@@ -1,22 +1,27 @@
-import { OrderModel } from '../../models/OrderModel.js';
-import { UserModel } from '../../models/UserModel.js';
-import { OrderStates } from '../../enums/states.js';
-import { AppActions } from '../../enums/actions.js';
-// TODO: refactor code
+import {OrderModel} from '../../models/OrderModel.js';
+import {UserModel} from '../../models/UserModel.js';
+import {OrderStates} from '../../enums/states.js';
+import {AppActions} from '../../enums/actions.js';
+
 /**
  * @param {{ store, api, dispatch, payload: { orderId: string } }} context
  */
-export async function cancelOrder({ store, api, dispatch, payload }) {
-    const { orderId } = payload;
+export async function cancelOrder({store, api, dispatch, payload}) {
+
+    //load operation parameters
+    const {orderId} = payload;
     const token = store.getState().auth.user.token;
 
+    //execute order cancellation operation
     const response = await api.orders.cancelOrder(token, orderId);
 
+    //handle operation fail
     if (response.status !== 'SUCCESS') {
-        dispatch({ type: AppActions.DISPLAY_ERROR, payload: { message: response.reason } });
+        dispatch({type: AppActions.DISPLAY_ERROR, payload: {message: response.reason}});
         return;
     }
 
+    //update application state especially user state
     store.setState((state) => {
         const u = state.auth.user;
         const updatedOrders = u.orders.map((o) =>
@@ -25,6 +30,6 @@ export async function cancelOrder({ store, api, dispatch, payload }) {
                 : o
         );
         const updatedUser = new UserModel(u.state, u.role, u.userId, u.token, u.username, u.password, updatedOrders);
-        return { ...state, auth: { user: updatedUser } };
+        return {...state, auth: {user: updatedUser}};
     });
 }
