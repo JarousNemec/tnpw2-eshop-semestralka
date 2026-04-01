@@ -42,5 +42,20 @@ export function selectViewState(state) {
           data: { products: state.shop.products }, 
           capabilities: {} 
       };
+
+
+    case 'CART':
+      return{
+          type: 'CART',
+          data: {cart: state.shop.cart},
+          capabilities: {}
+      };
+    
+    case 'ORDER':
+      return{
+        type: 'ORDER',
+        data: { cart: state.shop.cart },
+        capabilities: {}
+      };  
   }
 }

@@ -1,10 +1,7 @@
-// src/app/actionHandlers/createHandlers.js
-
 // Handler factory — vytváří callbacky pro konkrétní view
 // TODO: Přidejte handlery pro vaše views
-
-// src/app/actionHandlers/createHandlers.js
-import { CartActions } from '../../enums/actions.js';
+import { CartActions, AppActions, OrderActions} from '../../enums/actions.js';
+import { AddressModel } from '../../models/AddressModel.js';
 
 export function createHandlers(dispatch, viewState) {
   switch (viewState.type) {
@@ -21,15 +18,50 @@ export function createHandlers(dispatch, viewState) {
              type: CartActions.ADD_ITEM, 
              payload: { productId } 
            });
-        }
+        },
+        onGoToCart: () => dispatch({type: AppActions.ENTER_CART_VIEW})
       };
 
-    
+    case 'CART':
+      return{
+        onGoToShop: () => dispatch({ type: AppActions.ENTER_HOME_VIEW}),
 
+        onRemoveItem: (productId) => dispatch({ 
+          type: CartActions.REMOVE_ITEM,
+          payload: { productId }
+        }),
 
-    // TODO: Přidejte case větve pro vaše views
-    // case 'HOME':
-    //   return homeHandlers(dispatch, viewState);
+        onUpdateAmount: (productId, newQuantity) => {
+          if(newQuantity >= 0){
+            dispatch({
+              type: CartActions.UPDATE_ITEM,
+              payload: { productId, quantity: newQuantity }
+            });
+          }
+        },
+
+        onCheckout: () => {dispatch({ type: AppActions.ENTER_ORDER_VIEW })}
+      };
+
+      case'ORDER':
+        return{
+          onGoToShop: () => dispatch({ type: AppActions.ENTER_HOME_VIEW }),
+
+          onGoBackToCart: () => dispatch({ type: AppActions.ENTER_CART_VIEW }),
+
+          onSubmitOrder: (data) => {
+            const address = new AddressModel(
+              data.country,
+              data.city,
+              data.street,
+              data.postcode,
+              data.houseNumber
+            );
+
+            dispatch({ type: OrderActions.CREATE, payload: { address } });
+          }
+        };
+
     default:
         return {};
   }

@@ -2,15 +2,16 @@
 
 import { selectViewState } from '../infra/store/selectors.js';
 import { createHandlers } from '../app/actionHandlers/createHandlers.js';
-
 import { LoadingView } from './views/LoadingView.js';
 import { ErrorView } from './views/ErrorView.js';
-
 import { HomeView } from './views/HomeView.js';
+import { CartView } from './views/CartView.js';
+import { OrderView } from './views/OrderView.js';
+
 
 export function render(root, state, dispatch) {
   root.replaceChildren();
-  console.log(state) //todo: remove for prod
+  //console.log(state) (Ať to nespamuje konzoli)
 
   const viewState = selectViewState(state);
 
@@ -20,7 +21,7 @@ export function render(root, state, dispatch) {
 
   switch (viewState.type) {
     case 'LOADING':
-      view = LoadingView();
+      view = LoadingView(); 
       break;
 
     case 'ERROR':
@@ -31,13 +32,21 @@ export function render(root, state, dispatch) {
       view = HomeView({ viewState, handlers });
       break;
 
+    case 'CART':
+      view = CartView({ viewState, handlers});
+      break;
+
+    case 'ORDER':
+      view = OrderView({ viewState, handlers });
+      break;
+      
+
     default:
       view = document.createTextNode(`Unknown view type: ${viewState.type}`);
   }
 
   root.appendChild(view);
 
-  // notifikace (toast)
   const { notification } = state.ui;
 
   if (notification) {
