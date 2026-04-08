@@ -49,6 +49,5 @@ export async function createOrder({store, api, dispatch, payload}) {
     //reload shop list of product data after order creation
     await reloadProducts({store, api});
 
-    //todo nedává smysl tento přechod do view, toto order view bylo myšleno jako formulář pro vyplnění objednávky ne jako summary nebo tak aktuálně je tedy třeba určit jestli je potřeba fomulář pro tvorbu a nebo zda vše máme tím, že objednat může pouze přihlášený uživatel
     dispatch({type: AppActions.ENTER_ORDER_VIEW});
 }

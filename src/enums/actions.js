@@ -1,4 +1,5 @@
 /** @type {Readonly<{APP_INIT: string, DISPLAY_ERROR: string, RECOVER_FROM_ERROR: string, ENTER_HOME_VIEW: string, ENTER_CART_VIEW: string, ENTER_ORDER_VIEW: string, RELOAD_PRODUCTS: string, RELOAD_ORDERS: string, RELOAD_USER: string}>} */
+//TODO: přidat ORDER_SUCCESS view a vše okolo toho
 export const AppActions = Object.freeze({
     APP_INIT: "APP_INIT",
     DISPLAY_ERROR: "DISPLAY_ERROR",
