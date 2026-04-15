@@ -1,7 +1,7 @@
 /**
- * @param {{ store }} context
+ * @param {object} store
  * */
-export function recoverFromError({store}) {
+export function recoverFromError(store) {
     //change state from error to ready and running state
     store.setState((state) => ({
         ...state,
