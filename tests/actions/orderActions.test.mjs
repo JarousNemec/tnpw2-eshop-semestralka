@@ -2,7 +2,7 @@ import {
   assert, testAsync,
   makeStore, stateWithCartItem, stateWithOrder, adminStateWithOrder, adminState,
   createMockApi, createMockDispatch, sampleAddress, sampleProduct,
-} from './helpers.mjs';
+} from '../testFramework.mjs';
 import { OrderModel } from '../../src/models/OrderModel.js';
 import { CartStates, OrderStates } from '../../src/enums/states.js';
 import { createOrder } from '../../src/app/actions/createOrder.js';

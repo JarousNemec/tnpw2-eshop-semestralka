@@ -1,4 +1,4 @@
-import {assert, testAsync, makeStore, readyState, deepStrictEqual} from './helpers.mjs';
+import {assert, testAsync, makeStore, readyState, deepStrictEqual} from '../testFramework.mjs';
 import {displayError} from '../../src/app/actions/displayError.js';
 import {recoverFromError} from '../../src/app/actions/recoverFromError.js';
 import {enterHomeView} from '../../src/app/actions/enterHomeView.js';

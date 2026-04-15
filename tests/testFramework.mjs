@@ -1,12 +1,12 @@
-import {createStore} from '../../src/infra/store/createStore.js';
-import {createInitialState} from '../../src/app/state.js';
-import {UserModel} from '../../src/models/UserModel.js';
-import {CartModel} from '../../src/models/CartModel.js';
-import {ProductModel} from '../../src/models/ProductModel.js';
-import {OrderModel} from '../../src/models/OrderModel.js';
-import {AddressModel} from '../../src/models/AddressModel.js';
-import {UserStates, UserRoles, CartStates, OrderStates} from '../../src/enums/states.js';
-import {AppViews} from '../../src/enums/views.js';
+import {createStore} from '../src/infra/store/createStore.js';
+import {createInitialState} from '../src/app/state.js';
+import {UserModel} from '../src/models/UserModel.js';
+import {CartModel} from '../src/models/CartModel.js';
+import {ProductModel} from '../src/models/ProductModel.js';
+import {OrderModel} from '../src/models/OrderModel.js';
+import {AddressModel} from '../src/models/AddressModel.js';
+import {UserStates, UserRoles, CartStates, OrderStates} from '../src/enums/states.js';
+import {AppViews} from '../src/enums/views.js';
 
 const tests = [];
 

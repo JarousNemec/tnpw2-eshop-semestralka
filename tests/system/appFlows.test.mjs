@@ -20,7 +20,7 @@ import { CartModel } from '../../src/models/CartModel.js';
 import { OrderModel } from '../../src/models/OrderModel.js';
 import { UserModel } from '../../src/models/UserModel.js';
 import { AddressModel } from '../../src/models/AddressModel.js';
-import { assert, testAsync, createMockApi, mockApiOrder } from '../actions/helpers.mjs';
+import { assert, testAsync, createMockApi, mockApiOrder } from '../testFramework.mjs';
 
 /*
  * Pomocná funkce: vytvoří store + dispatcher s mock API

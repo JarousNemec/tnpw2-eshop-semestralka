@@ -1,4 +1,4 @@
-import { assert, testAsync, makeStore, readyState, stateWithCartItem, sampleProduct } from './helpers.mjs';
+import { assert, testAsync, makeStore, readyState, stateWithCartItem, sampleProduct } from '../testFramework.mjs';
 import { CartModel } from '../../src/models/CartModel.js';
 import { ProductModel } from '../../src/models/ProductModel.js';
 import { CartStates } from '../../src/enums/states.js';

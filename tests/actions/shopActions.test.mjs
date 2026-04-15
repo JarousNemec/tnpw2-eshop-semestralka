@@ -2,7 +2,7 @@ import {
   assert, testAsync,
   makeStore, readyState, customerState,
   createMockApi, createMockDispatch, mockApiOrder,
-} from './helpers.mjs';
+} from '../testFramework.mjs';
 import { CartModel } from '../../src/models/CartModel.js';
 import { ProductModel } from '../../src/models/ProductModel.js';
 import { OrderModel } from '../../src/models/OrderModel.js';
