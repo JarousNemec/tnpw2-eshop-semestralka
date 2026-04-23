@@ -1,6 +1,6 @@
 import {
   assert, testAsync,
-  makeStore, stateWithCartItem, stateWithOrder, adminStateWithOrder, adminState,
+  makeStore, stateWithCartItem, stateWithOrder, adminStateWithOrder,
   createMockApi, createMockDispatch, sampleAddress, sampleProduct,
 } from '../testFramework.mjs';
 import { OrderModel } from '../../src/models/OrderModel.js';
@@ -43,11 +43,11 @@ testAsync('createOrder: vyčistí košík po úspěchu', async () => {
   assert(cart.state === CartStates.EMPTY, 'cart.state === EMPTY');
 });
 
-testAsync('createOrder: dispatchuje ENTER_ORDER_VIEW po úspěchu', async () => {
+testAsync('createOrder: dispatchuje ENTER_ORDER_SUCCESS_VIEW po úspěchu', async () => {
   const store = makeStore(stateWithCartItem());
   const dispatch = createMockDispatch();
   await createOrder({ store, api: createMockApi(), dispatch, payload: { address: sampleAddress() } });
-  assert(dispatch.calledWith('ENTER_ORDER_VIEW'), 'byl volán ENTER_ORDER_VIEW');
+  assert(dispatch.calledWith('ENTER_ORDER_SUCCESS_VIEW'), 'byl volán ENTER_ORDER_SUCCESS_VIEW');
 });
 
 testAsync('createOrder: dispatchuje DISPLAY_ERROR při selhání API', async () => {

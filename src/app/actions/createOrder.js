@@ -49,5 +49,5 @@ export async function createOrder({store, api, dispatch, payload}) {
     //reload shop list of product data after order creation
     await reloadProducts({store, api});
 
-    dispatch({type: AppActions.ENTER_ORDER_VIEW});
+    dispatch({type: AppActions.ENTER_ORDER_SUCCESS_VIEW});
 }

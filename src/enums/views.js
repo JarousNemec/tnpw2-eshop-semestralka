@@ -1,8 +1,8 @@
-/** @type {Readonly<{HOME: string, CART: string, ORDER: string, PROFILE: string}>} */
-//TODO: přidat ORDER_SUCCESS view a vše okolo toho
+/** @type {Readonly<{HOME: string, CART: string, ORDER: string, ORDER_SUCCESS: string, PROFILE: string}>} */
 export const AppViews = Object.freeze({
     HOME: "HOME",
     CART: "CART",
     ORDER: "ORDER",
+    ORDER_SUCCESS: "ORDER_SUCCESS",
     PROFILE: "PROFILE"
 });

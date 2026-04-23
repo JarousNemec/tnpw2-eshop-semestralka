@@ -4,6 +4,7 @@ import { displayError } from './actions/displayError.js';
 import { enterHomeView } from './actions/enterHomeView.js';
 import { enterCartView } from './actions/enterCartView.js';
 import { enterOrderView } from './actions/enterOrderView.js';
+import { enterOrderSuccessView } from './actions/enterOrderSuccessView.js';
 import { addToCart } from './actions/addToCart.js';
 import { removeFromCart } from './actions/removeFromCart.js';
 import { updateCartItem } from './actions/updateCartItem.js';
@@ -45,6 +46,9 @@ export function createDispatcher(store, api) {
 
             case AppActions.ENTER_ORDER_VIEW:
                 return enterOrderView({ store });
+
+            case AppActions.ENTER_ORDER_SUCCESS_VIEW:
+                return enterOrderSuccessView({ store });
 
             // cart actions
             case CartActions.ADD_ITEM:

@@ -4,6 +4,7 @@ import {recoverFromError} from '../../src/app/actions/recoverFromError.js';
 import {enterHomeView} from '../../src/app/actions/enterHomeView.js';
 import {enterCartView} from '../../src/app/actions/enterCartView.js';
 import {enterOrderView} from '../../src/app/actions/enterOrderView.js';
+import {enterOrderSuccessView} from '../../src/app/actions/enterOrderSuccessView.js';
 
 /*
  * Testy UI akcí: displayError, recoverFromError, enterHomeView, enterCartView, enterOrderView
@@ -79,4 +80,10 @@ testAsync('enterOrderView: nastaví ui.view na ORDER', async () => {
     const store = makeStore(readyState());
     await enterOrderView({store});
     assert(store.getState().ui.view === 'ORDER', 'ui.view === ORDER');
+});
+
+testAsync('enterOrderSuccessView: nastaví ui.view na ORDER_SUCCESS', async () => {
+    const store = makeStore(readyState());
+    await enterOrderSuccessView({store});
+    assert(store.getState().ui.view === 'ORDER_SUCCESS', 'ui.view === ORDER_SUCCESS');
 });

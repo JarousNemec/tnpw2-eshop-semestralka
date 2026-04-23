@@ -100,6 +100,12 @@ testAsync('ENTER_ORDER_VIEW: změní ui.view na ORDER', async () => {
   assert(store.getState().ui.view === AppViews.ORDER, 'ui.view === ORDER');
 });
 
+testAsync('ENTER_ORDER_SUCCESS_VIEW: změní ui.view na ORDER_SUCCESS', async () => {
+  const { store, dispatch } = createSystem();
+  await dispatch({ type: AppActions.ENTER_ORDER_SUCCESS_VIEW });
+  assert(store.getState().ui.view === AppViews.ORDER_SUCCESS, 'ui.view === ORDER_SUCCESS');
+});
+
 testAsync('ENTER_HOME_VIEW: vrátí ui.view na HOME', async () => {
   const { store, dispatch } = createSystem();
   await dispatch({ type: AppActions.ENTER_CART_VIEW });
@@ -227,7 +233,7 @@ testAsync('Nákupní flow: init → login → přidej do košíku → vytvoř ob
   assert(state.auth.user.orders.length === 1, 'objednávka vytvořena');
   assert(state.shop.cart.products.length === 0, 'košík vyprázdněn');
   assert(state.auth.user.orders[0].state === OrderStates.CREATED, 'order.state === ORDER_CREATED');
-  assert(state.ui.view === AppViews.ORDER, 'přesměrováno na ORDER view');
+  assert(state.ui.view === AppViews.ORDER_SUCCESS, 'přesměrováno na ORDER_SUCCESS view');
 });
 
 // ── Kompletní flow: správa objednávky adminem ─────────────────────────────────
