@@ -5,7 +5,6 @@ export function selectAuth(state) {
   return state.auth;
 }
 
-// TODO: Přidejte doménové selektory
 // export function selectProducts(state) {
 //   return state.products ?? [];
 // }
@@ -34,7 +33,6 @@ export function selectViewState(state) {
     return { type: 'ERROR', message: `Unknown ui status: ${status}` };
   }
 
-  // TODO: Přidejte case větve pro vaše views
   switch (view) {
     case 'HOME':
       return { 

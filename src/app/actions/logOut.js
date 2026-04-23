@@ -14,7 +14,6 @@ export async function logOut({ store, api }) {
     await api.auth.logout(token);
 
     //remove current user from app state and enter anonymous state
-    //todo: je dobré že se při odhlášení smaže i košík nebo ne???
     store.setState((state) => ({
         ...state,
         auth: {

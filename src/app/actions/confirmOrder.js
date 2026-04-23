@@ -18,7 +18,6 @@ export async function confirmOrder({store, dispatch, payload}) {
         return;
     }
 
-    //todo: update state in db through api
     store.setState((state) => {
         //get current user
         const u = state.auth.user;

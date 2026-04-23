@@ -2,16 +2,6 @@
 import {AppActions} from '../../enums/actions.js';
 import {AppViews} from "../../enums/views.js";
 
-// --------------------------------------------------
-// Router pracuje s LOGICKOU CESTOU aplikace,
-// nikoli s celou URL (protokol, host, port ho nezajímají).
-//
-// TODO: Definujte navigační kontexty aplikace:
-//   #/         ... domovská stránka
-//   #/list     ... seznam entit
-//   #/detail/:id ... detail entity
-// --------------------------------------------------
-
 // URL -> route
 // odstraníme # a technické části
 export function urlToRoute(url) {
@@ -25,7 +15,6 @@ export function parseUrl(path) {
     const parts = path.split('/').filter(Boolean);
     const routeName = parts[0] || '';
 
-    // TODO: Přidejte pravidla pro vaše URL
     switch (routeName) {
         case 'cart':
             return {context: 'CART'};
@@ -38,7 +27,6 @@ export function parseUrl(path) {
 
 // route -> navigační akce
 export function routeToAction(route) {
-    // TODO: Přidejte mapování route -> akce
     switch (route.context) {
         case AppViews.CART:
             return {type: AppActions.ENTER_CART_VIEW};

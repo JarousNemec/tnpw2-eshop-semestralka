@@ -1,5 +1,4 @@
 // Handler factory — vytváří callbacky pro konkrétní view
-// TODO: Přidejte handlery pro vaše views
 import { CartActions, AppActions, OrderActions} from '../../enums/actions.js';
 import { AddressModel } from '../../models/AddressModel.js';
 

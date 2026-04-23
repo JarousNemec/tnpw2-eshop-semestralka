@@ -19,7 +19,6 @@ export async function finishOrder({store, dispatch, payload}) {
 
 
     //update order state in app state
-    //todo: update state in db through api
     store.setState((state) => {
         const u = state.auth.user;
         const updatedOrders = u.orders.map((o) =>

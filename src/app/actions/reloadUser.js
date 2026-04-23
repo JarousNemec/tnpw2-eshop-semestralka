@@ -20,7 +20,6 @@ export async function reloadUser({store, api}) {
     const whoAmIResponse = await api.auth.whoAmI(token);
 
     //handle user login state
-    //todo: chceme tu smazat košík stejně jako v logoutu??? hodilo by se to sjednotit protože toto je v podstatě taky logout
     if (whoAmIResponse.status !== 'SUCCESS') {
         store.setState((state) => ({
             ...state,

@@ -18,7 +18,6 @@ export async function shipOrder({store, dispatch, payload}) {
     }
 
     //get user object, find current order, update its state to shipped, update app state
-    //todo: update state in db through api
     store.setState((state) => {
         const u = state.auth.user;
         const updatedOrders = u.orders.map((o) =>
