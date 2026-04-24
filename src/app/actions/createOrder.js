@@ -43,11 +43,11 @@ export async function createOrder({store, api, dispatch, payload}) {
             ...s,
             auth: {user: updatedUser},
             shop: {...s.shop, cart: new CartModel([], CartStates.EMPTY)},
+            
         };
     });
 
     //reload shop list of product data after order creation
     await reloadProducts({store, api});
-
     dispatch({type: AppActions.ENTER_ORDER_SUCCESS_VIEW});
 }

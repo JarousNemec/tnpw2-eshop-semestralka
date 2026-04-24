@@ -20,6 +20,8 @@ export function parseUrl(path) {
             return {context: 'CART'};
         case 'order':
             return {context: 'ORDER'};
+        case 'login':
+            return{context: 'LOGIN'}
         default:
             return {context: 'HOME'};
     }
@@ -32,6 +34,8 @@ export function routeToAction(route) {
             return {type: AppActions.ENTER_CART_VIEW};
         case AppViews.ORDER:
             return {type: AppActions.ENTER_ORDER_VIEW};
+        case AppViews.LOGIN:
+            return {type: 'ENTER_LOGIN_VIEW'};
         case AppViews.HOME:
             return {type: AppActions.ENTER_HOME_VIEW};
         default:

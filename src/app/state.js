@@ -19,6 +19,10 @@ export function createInitialState() {
         shop: {
             products: [],
             cart: null
+        },
+
+        admin: {
+            allOrders: []
         }
     };
 }

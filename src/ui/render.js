@@ -7,6 +7,10 @@ import { ErrorView } from './views/ErrorView.js';
 import { HomeView } from './views/HomeView.js';
 import { CartView } from './views/CartView.js';
 import { OrderView } from './views/OrderView.js';
+import { LoginView } from './views/LoginView.js';
+import { OrderSuccessView } from './views/OrderSuccessView.js';
+import { ProfileView } from './views/ProfileView.js';
+import { AdminView } from './views/AdminView.js';
 
 
 export function render(root, state, dispatch) {
@@ -22,6 +26,10 @@ export function render(root, state, dispatch) {
   switch (viewState.type) {
     case 'LOADING':
       view = LoadingView(); 
+      break;
+
+    case'LOGIN':
+      view = LoginView({ handlers });
       break;
 
     case 'ERROR':
@@ -40,9 +48,21 @@ export function render(root, state, dispatch) {
       view = OrderView({ viewState, handlers });
       break;
       
+    case 'ORDER_SUCCESS':
+      view = OrderSuccessView({ handlers });
+      break;
+
+    case 'PROFILE':
+      view = ProfileView({ viewState, handlers });
+      break;
+
+    case 'ADMIN':
+      view = AdminView({ viewState, handlers });
+      break;
 
     default:
       view = document.createTextNode(`Unknown view type: ${viewState.type}`);
+      break;
   }
 
   root.appendChild(view);

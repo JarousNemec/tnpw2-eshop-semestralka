@@ -4,5 +4,7 @@ export const AppViews = Object.freeze({
     CART: "CART",
     ORDER: "ORDER",
     ORDER_SUCCESS: "ORDER_SUCCESS",
-    PROFILE: "PROFILE"
+    PROFILE: "PROFILE",
+    LOGIN: "LOGIN",
+    ADMIN: "ADMIN"
 });

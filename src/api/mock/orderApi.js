@@ -72,6 +72,16 @@ export function createOrderApi(db) {
             return {status: 'SUCCESS', orders: structuredClone(orders)};
         },
 
+        async getAllOrders(token){
+            await delay();
+
+            const user = db.users.find((u) => u.token === token);
+            if(!user || user.role !== 'ADMIN'){
+                return {status: 'REJECTED', reason: 'Přístup odepřen'};
+            }
+            return {status: 'SUCCESS', orders: structuredClone(db.orders)};
+        },
+
         async cancelOrder(token, orderId) {
             //simulate real http call delay
             await delay();
@@ -91,7 +101,7 @@ export function createOrderApi(db) {
             }
 
             //check if order belongs to user
-            if (order.userId !== user.userId) {
+            if (order.userId !== user.userId && user.role !== 'ADMIN') {
                 return {status: 'REJECTED', reason: 'Přístup odepřen'};
             }
 

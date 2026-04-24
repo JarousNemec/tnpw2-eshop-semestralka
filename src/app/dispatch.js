@@ -23,6 +23,8 @@ import { AppActions, CartActions, OrderActions, UserActions } from '../enums/act
 
 
 export function createDispatcher(store, api) {
+
+    
     return async function dispatch(action) {
         const { type, payload = {} } = action ?? {};
 
@@ -49,6 +51,8 @@ export function createDispatcher(store, api) {
 
             case AppActions.ENTER_ORDER_SUCCESS_VIEW:
                 return enterOrderSuccessView({ store });
+
+
 
             // cart actions
             case CartActions.ADD_ITEM:
@@ -96,9 +100,26 @@ export function createDispatcher(store, api) {
             case AppActions.RELOAD_USER:
                 return reloadUser({ store, api });
 
-            // default reaction to unknown action
+            case AppActions.ENTER_LOGIN_VIEW:
+                return store.setState((state) => ({ ...state, ui: {...state.ui, view: 'LOGIN'}}))
+
+            case AppActions.ENTER_PROFILE_VIEW:
+                return store.setState((state) => ({ ...state, ui: {...state.ui, view: 'PROFILE'}}))
+
+            case AppActions.ENTER_ADMIN_VIEW:
+                return (async () => {
+                    const token = store.getState().auth.user.token;
+                    const response = await api.orders.getAllOrders(token);
+                    store.setState((state) => ({
+                        ...state,
+                        admin: { allOrders: response.status === 'SUCCESS' ? response.orders : []},
+                        ui: { ...state.ui, view: 'ADMIN' }
+                    }));
+                })();
+
             default:
                 console.warn(`Unknown action type: ${type}`);
         }
     };
 }
+

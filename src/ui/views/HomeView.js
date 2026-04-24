@@ -2,6 +2,7 @@ import { h } from '../dom.js';
 
 export function HomeView({ viewState, handlers }) {
     const products = viewState.data?.products || [];
+    const { isAuth, isAdmin, canAddToCart } = viewState.capabilities;
 
     if (products.length === 0) {
         return h('main', { className: 'container' },
@@ -11,32 +12,25 @@ export function HomeView({ viewState, handlers }) {
     }
 
     return h('main', { className: 'container' },
-        h('div', {style: 'display: flex; justify-content: space-between; align-items:center'},
-            h('h1', {}, 'Katalog produktů'),
-            h('button', {
-                className: 'secondary',
-                onClick: handlers.onGoToCart
-            }, 'Přejít do košíku')
+        h('div', {style: 'display: flex; gap: 1rem; align-items:center; margin-bottom: 2rem; flex-wrap: wrap;'},
+            h('h1', {style: 'margin: 0; flex-grow: 1;'}, 'Katalog produktů'),
+            
+            isAuth ? h('button', { className: 'secondary outline', onClick: handlers.onGoToProfile }, 'Můj profil') : '',
+            isAdmin ? h('button', { className: 'secondary outline', onClick: handlers.onGoToAdmin }, 'Admin Panel') : '',
+            isAuth ? h('button', { className: 'secondary', onClick: handlers.onLogout }, 'Odhlásit') : h('button', { className: 'secondary', onClick: handlers.onGoToLogin }, 'Přihlásit'),
+            h('button', { className: 'primary', onClick: handlers.onGoToCart }, 'Košík')
         ),
-        
-            h('div', { className: 'katalog-grid' }, 
-                products.map(product => 
-                    h('article', { className: 'card' },
-                        h('h3', {}, product.name),
-                        h('p', {}, product.description),
-                        h('strong', {}, `${product.price} Kč`),
-                    
-                        h('button', { 
-                            onClick: () => {
-                                if (handlers.onAddToCart) {
-                                    handlers.onAddToCart(product.productId);
-                                } else {
-                                    console.log('Kliknuto na produkt:', product.productId);
-                                }
-                            }
-                        }, 'Přidat do košíku')
-                    )
+
+        h('div', { className: 'katalog-grid' }, 
+            products.map(product => 
+                h('article', { className: 'card' },
+                    h('h3', {}, product.name),
+                    h('p', {}, product.description),
+                    h('strong', {}, `${product.price} Kč`),
+                
+                    canAddToCart ? h('button', { onClick: () => handlers.onAddToCart(product.productId) }, 'Přidat do košíku') : ''
                 )
             )
-        );
+        )
+    );
 }

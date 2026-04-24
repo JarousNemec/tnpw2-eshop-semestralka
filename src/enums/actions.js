@@ -10,6 +10,9 @@ export const AppActions = Object.freeze({
     RELOAD_PRODUCTS: "RELOAD_PRODUCTS",
     RELOAD_ORDERS: "RELOAD_ORDERS",
     RELOAD_USER: "RELOAD_USER",
+    ENTER_LOGIN_VIEW: "ENTER_LOGIN_VIEW",
+    ENTER_PROFILE_VIEW: "ENTER_PROFILE_VIEW",
+    ENTER_ADMIN_VIEW: "ENTER_ADMIN_VIEW",
 });
 
 /** @type {Readonly<{ADD_ITEM: string, REMOVE_ITEM: string, UPDATE_ITEM: string, CLEAR: string}>} */

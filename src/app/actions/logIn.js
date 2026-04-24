@@ -14,7 +14,7 @@ export async function logIn({store, api, dispatch, payload}) {
     const {email, password} = payload;
 
     //log user to app
-    const response = await api.auth.login(email, password);
+    const response = await api.auth.login({email, password});
 
     //handle error
     if (response.status !== 'SUCCESS') {
@@ -40,5 +40,8 @@ export async function logIn({store, api, dispatch, payload}) {
     store.setState((state) => ({
         ...state,
         auth: {user},
+        
     }));
+    
+    dispatch({ type: AppActions.ENTER_HOME_VIEW });
 }

@@ -19,17 +19,15 @@ export function OrderView({ viewState, handlers }) {
         h('form', {
             onSubmit: (e) => {
                 e.preventDefault();
-                const formData = FormData(e.target);
+                const formData = new FormData(e.target);
 
-                const addressData = {
+                handlers.onCreateOrder({
                     street: formData.get('street'),
                     houseNumber: formData.get('houseNumber'),
                     city: formData.get('city'),
                     postcode: formData.get('postcode'),
-                    country: formData.Data.get('country'),
-                };
-
-                handlers.onSubmitOrder(addressData);
+                    country: formData.get('country'),
+                });
             }
         },
         

@@ -30,6 +30,8 @@ export async function cancelOrder({store, api, dispatch, payload}) {
                 : o
         );
         const updatedUser = new UserModel(u.state, u.role, u.userId, u.token, u.username, u.password, updatedOrders);
-        return {...state, auth: {user: updatedUser}};
+        const updatedAdminOrders = (state.admin?.allOrders || []).map((o) => o.orderId === orderId ? { ...o, state: 'ORDER_CANCELLED' } : o
+        );
+        return {...state, auth: {user: updatedUser}, admin: { allOrders: updatedAdminOrders}};
     });
 }
