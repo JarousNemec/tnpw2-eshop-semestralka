@@ -16,15 +16,13 @@ export async function shipOrder({store, dispatch, payload}) {
     }
 
     store.setState((state) => {
-        const updatedAdminOrders = (state.admin?.allOrders || []).map((o) =>
+        const u = state.auth.user;
+        const updatedOrders = u.orders.map((o) =>
             o.orderId === orderId
-                ? { ...o, state: 'ORDER_SHIPPED' }
+                ? new OrderModel(o.orderId, o.products, o.address, o.user, OrderStates.SHIPPED)
                 : o
         );
-
-       return {
-            ...state, 
-            admin: { ...state.admin, allOrders: updatedAdminOrders }
-        };
+        const updatedUser = new UserModel(u.state, u.role, u.userId, u.token, u.username, u.password, updatedOrders);
+        return {...state, auth: {user: updatedUser}};
     });
 }

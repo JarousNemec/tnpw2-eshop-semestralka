@@ -75,13 +75,13 @@ export function createDispatcher(store, api) {
                 return cancelOrder({ store, api, dispatch, payload });
 
             case OrderActions.CONFIRM:
-                return confirmOrder({ store, payload });
+                return confirmOrder({ store, dispatch, payload });
 
             case OrderActions.SHIP:
-                return shipOrder({ store, payload });
+                return shipOrder({ store, dispatch, payload });
 
             case OrderActions.FINISH:
-                return finishOrder({ store, payload });
+                return finishOrder({ store, dispatch, payload });
 
             // user actions
             case UserActions.LOG_IN:

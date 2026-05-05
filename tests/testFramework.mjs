@@ -98,7 +98,7 @@ export function createMockDispatch() {
  */
 export function createMockApi(overrides = {}) {
     const auth = {
-        async login(email, password) {
+        async login({email, password}) {
             if (email === 'jan@bshop.cz' && password === 'heslo123') {
                 return {status: 'SUCCESS', token: 'customer-token-1', userId: 'customer-1', role: 'CUSTOMER', email};
             }

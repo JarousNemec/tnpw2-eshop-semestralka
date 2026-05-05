@@ -1,5 +1,7 @@
-import { UserRoles } from '../../enums/states.js';
-import { AppActions } from '../../enums/actions.js';
+import {OrderModel} from '../../models/OrderModel.js';
+import {UserModel} from '../../models/UserModel.js';
+import {OrderStates, UserRoles} from '../../enums/states.js';
+import {AppActions} from '../../enums/actions.js';
 
 /**
  * @param {{ store, dispatch, payload: { orderId: string } }} context
@@ -14,15 +16,13 @@ export async function confirmOrder({store, dispatch, payload}) {
     }
 
     store.setState((state) => {
-        const updatedAdminOrders = (state.admin?.allOrders || []).map((o) =>
+        const u = state.auth.user;
+        const updatedOrders = u.orders.map((o) =>
             o.orderId === orderId
-                ? { ...o, state: 'ORDER_CONFIRMED' }
+                ? new OrderModel(o.orderId, o.products, o.address, o.user, OrderStates.CONFIRMED)
                 : o
         );
-
-        return {
-            ...state, 
-            admin: { ...state.admin, allOrders: updatedAdminOrders }
-        };
+        const updatedUser = new UserModel(u.state, u.role, u.userId, u.token, u.username, u.password, updatedOrders);
+        return {...state, auth: {user: updatedUser}};
     });
 }
